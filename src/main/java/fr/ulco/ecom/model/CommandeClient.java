@@ -12,7 +12,7 @@ public class CommandeClient implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "montant")
     private float montant;
     @Column(name = "date_creation")
@@ -24,11 +24,11 @@ public class CommandeClient implements Serializable {
     @OneToMany(targetEntity = ProduitCommande.class, mappedBy = "commandeClient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProduitCommande> produitCommandes;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

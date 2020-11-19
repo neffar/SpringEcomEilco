@@ -12,7 +12,7 @@ public class Produit implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "nom")
     private String nom;
     @Column(name = "prix")
@@ -26,11 +26,11 @@ public class Produit implements Serializable {
     @OneToMany(targetEntity = ProduitCommande.class, mappedBy = "produit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProduitCommande> produitCommandes;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

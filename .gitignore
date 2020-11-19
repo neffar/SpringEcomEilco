@@ -8,3 +8,4 @@ mvnw.cmd
 bin
 build
 lib/
+src/main/resources/logBack.xml

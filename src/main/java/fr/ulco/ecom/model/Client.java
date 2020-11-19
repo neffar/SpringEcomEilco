@@ -11,7 +11,7 @@ public class Client implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "nom")
     private String nom;
     @Column(name = "email")
@@ -23,11 +23,11 @@ public class Client implements Serializable {
     @OneToMany(targetEntity = CommandeClient.class, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommandeClient> commandeClients;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

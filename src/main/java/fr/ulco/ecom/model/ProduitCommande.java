@@ -10,7 +10,7 @@ public class ProduitCommande implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "quantite")
     private int quantite;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,11 +20,11 @@ public class ProduitCommande implements Serializable {
     @JoinColumn(name = "produit_id")
     private Produit produit;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

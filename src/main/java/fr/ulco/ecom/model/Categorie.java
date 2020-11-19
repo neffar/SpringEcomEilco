@@ -11,17 +11,17 @@ public class Categorie implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
     @Column(name = "nom")
     private String nom;
     @OneToMany(targetEntity = Produit.class, mappedBy = "categorie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produit> produits;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
