@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * contient les services de gestion des commandes
  */
 @Controller
-@RequestMapping(value = "/commande")
+@RequestMapping(value = "/user/commande")
 public class CommandeController {
 }

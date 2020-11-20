@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * de la e-boutique, en particulier pour l’accès aux catégoriesaux et aux produits
  */
 @Controller
-@RequestMapping(value = "/catalogue")
+@RequestMapping(value = "/user/catalogue")
 public class CatalogueController {
 }
