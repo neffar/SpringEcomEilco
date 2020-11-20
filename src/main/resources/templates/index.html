@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>INDEX</title>
+    <title>Accueil</title>
 </head>
 <body>
-<h1>HI</h1>
+<div layout:fragment="page_header">Accueil</div>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-chart">
+                <div class="card-header card-header-success text-center">
+                    <h1>Accueil</h1>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-center text-capitalize">Bienvenue dans ma boutique</h4>
+                    <p class="card-category">Meilleur site e-commerce</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
