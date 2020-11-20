@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="#" id="category">
                         <i class="material-icons">content_paste</i>
                         <p>Catégories</p>
                     </a>
@@ -97,9 +97,9 @@
         <!-- End Navbar -->
         <div class="content">
             <div class="container-fluid">
-
                 <!-- your content here -->
                 <div layout:fragment="content"></div>
+                <div id="cat-result"></div>
             </div>
         </div>
         <footer class="footer">
@@ -140,8 +140,30 @@
 
 <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 <script th:src="@{/js/plugins/bootstrap-selectpicker.js}"></script>
-
 <div layout:fragment="javascript"></div>
+
+<script>
+    const cat_result = document.querySelector("#cat-result")
+    const category = document.querySelector("#category")
+
+    category.addEventListener('click', () => {
+        $.ajax({
+            type: 'get',
+            contentType: 'application/json',
+            url: '/api/categories',
+            cache: false,
+            success: data => {
+                const parsed = JSON.parse(data)
+                console.log(data)
+            },
+            error: (xhr, status, error) => {
+                console.log('ERROR: ')
+                console.log(error)
+                // console.log(xhr.responseText)
+            }
+        })
+    })
+</script>
 
 </body>
 </html>
