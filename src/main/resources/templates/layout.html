@@ -149,11 +149,11 @@
     category.addEventListener('click', () => {
         $.ajax({
             type: 'get',
-            contentType: 'application/json',
-            url: '/api/categories',
+            //contentType: 'application/json',
+            url: '/categories/',
             cache: false,
             success: data => {
-                const parsed = JSON.parse(data)
+                //const parsed = JSON.parse(data)
                 console.log(data)
             },
             error: (xhr, status, error) => {
