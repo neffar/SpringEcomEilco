@@ -17,7 +17,7 @@
 
 <body>
 <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="white" data-image="/img/sidebar-3.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="/img/sidebar-3.jpg">
         <!-- data-color="purple | azure | green | orange | danger" -->
         <div class="logo">
             <a href="#" class="simple-text logo-mini">
@@ -165,6 +165,7 @@
     cat_result.style.visibility = 'hidden'
 
     category.addEventListener('click', () => {
+        cat_data.innerHTML = ''
         $.ajax({
             type: 'get',
             contentType: 'application/json',
