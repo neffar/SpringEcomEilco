@@ -172,6 +172,8 @@
             url: '/categories/',
             cache: false,
             success: data => {
+                document.title = 'Catalogue'
+                window.history.pushState('catalogue','Catalogue', 'catalogue')
                 if (accueil != null)
                     accueil.remove()
                 cat_result.style.visibility = 'visible'
