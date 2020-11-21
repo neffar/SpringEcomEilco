@@ -64,7 +64,8 @@
                 <div class="navbar-wrapper">
                     <a class="navbar-brand" href="javascript:">
                         <div layout:fragment="page_header"></div>
-<!--                        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+
+                        <!--                        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
@@ -80,9 +81,7 @@
                             <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">person</i>
-                                <p class="d-lg-none d-md-block">
-                                    Account
-                                </p>
+                                <p class="d-lg-none d-md-block">Account</p>
                                 <div class="ripple-container"></div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
@@ -99,10 +98,25 @@
         </nav>
         <!-- End Navbar -->
         <div class="content">
-            <div class="container-fluid">
+            <div class="container-fluid h-100">
                 <!-- your content here -->
                 <div layout:fragment="content"></div>
-                <div id="cat-result"></div>
+
+                <div class="row h-100 justify-content-center align-items-center" id="cat-result">
+                    <div class="col-md-9">
+                        <div class="card card-chart" id="accueil">
+                            <div class="card-header card-header-success text-center">
+                                <h2>Catégories</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title text-center text-capitalize">
+                                    <ul class="nav justify-content-center" id="cat-data"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <footer class="footer">
@@ -110,9 +124,7 @@
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <a href="#">
-                                EILCO
-                            </a>
+                            <a href="#">EILCO</a>
                         </li>
                     </ul>
                 </nav>
@@ -140,24 +152,34 @@
 <script th:src="@{/js/plugins/bootstrap-notify.js}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script th:src="@{/js/material-dashboard.js}" type="text/javascript"></script>
-
 <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 <script th:src="@{/js/plugins/bootstrap-selectpicker.js}"></script>
 <div layout:fragment="javascript"></div>
 
 <script>
     const cat_result = document.querySelector("#cat-result")
+    const cat_data = document.querySelector("#cat-data")
     const category = document.querySelector("#category")
+    const accueil = document.getElementById("accueil")
+
+    cat_result.style.visibility = 'hidden'
 
     category.addEventListener('click', () => {
         $.ajax({
             type: 'get',
-            //contentType: 'application/json',
+            contentType: 'application/json',
             url: '/categories/',
             cache: false,
             success: data => {
-                //const parsed = JSON.parse(data)
-                console.log(data)
+                if (accueil != null)
+                    accueil.remove()
+                cat_result.style.visibility = 'visible'
+                for (let i = 0; i < data['page']['totalElements']; i++) {
+                    cat_data.innerHTML += '<li class="list-item"><a class="nav-link active" href="#">' +
+                        data['_embedded']['categories'][i]['nom'] +
+                        '</a></li>'
+                }
+                console.log(data['_embedded']['categories'])
             },
             error: (xhr, status, error) => {
                 console.log(error)
