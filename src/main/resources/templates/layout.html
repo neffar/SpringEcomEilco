@@ -104,13 +104,27 @@
 
                 <div class="row h-100 justify-content-center align-items-center" id="cat-result">
                     <div class="col-md-9">
-                        <div class="card card-chart" id="accueil">
+                        <div class="card card-chart">
                             <div class="card-header card-header-success text-center">
                                 <h2>Catégories</h2>
                             </div>
                             <div class="card-body">
                                 <div class="card-title text-center text-capitalize">
                                     <ul class="nav justify-content-center" id="cat-data"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row h-100 justify-content-center align-items-center" id="prod-result">
+                    <div class="col-md-9">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success text-center">
+                                Liste des produits
+                            </div>
+                            <div class="card-body">
+                                <div class="row row-cols-1 row-cols-md-3 g-4" id="prod-data">
                                 </div>
                             </div>
                         </div>
@@ -158,11 +172,14 @@
 
 <script>
     const cat_result = document.querySelector("#cat-result")
+    const prod_result = document.querySelector("#prod-result")
     const cat_data = document.querySelector("#cat-data")
+    const prod_data = document.querySelector("#prod-data")
     const category = document.querySelector("#category")
     const accueil = document.getElementById("accueil")
 
     cat_result.style.visibility = 'hidden'
+    prod_result.style.visibility = 'hidden'
 
     category.addEventListener('click', () => {
         cat_data.innerHTML = ''
@@ -173,22 +190,57 @@
             cache: false,
             success: data => {
                 document.title = 'Catalogue'
-                window.history.pushState('catalogue','Catalogue', 'catalogue')
+                window.history.pushState('catalogue', 'Catalogue', 'catalogue')
                 if (accueil != null)
                     accueil.remove()
                 cat_result.style.visibility = 'visible'
                 for (let i = 0; i < data['page']['totalElements']; i++) {
-                    cat_data.innerHTML += '<li class="list-item"><a class="nav-link active" href="#">' +
+                    let url_link = data['_embedded']['categories'][i]['_links']['produits']['href']
+                    cat_data.innerHTML += '<li class="list-item">' +
+                        '<a onclick="getProducts(\'' + url_link + '\')" class="nav-link active" href="#">' +
                         data['_embedded']['categories'][i]['nom'] +
-                        '</a></li>'
+                        '</a>' +
+                        '</li>'
                 }
-                console.log(data['_embedded']['categories'])
             },
             error: (xhr, status, error) => {
                 console.log(error)
             }
         })
     })
+
+    const getProducts = url => {
+        prod_data.innerHTML = ''
+        $.ajax({
+            type: 'get',
+            contentType: 'application/json',
+            url: url,
+            cache: false,
+            success: data => {
+                prod_result.style.visibility = 'visible'
+                const prod_length = data['_embedded']['produits'].length
+                for (let i = 0; i < prod_length; i++) {
+                    let nom = data['_embedded']['produits'][i]['nom']
+                    let prix = data['_embedded']['produits'][i]['prix']
+                    let desc = data['_embedded']['produits'][i]['description']
+                    prod_data.innerHTML += '<div class="col">' +
+                        '                                        <div class="card">' +
+                        '                                            <img src="#" class="card-img-top" alt="Product">' +
+                        '                                            <div class="card-body">' +
+                        '                                                <h4 class="card-title">' + nom + '</h4>' +
+                        '                                                <h5 class="card-title">' + prix + ' $</h5>' +
+                        '                                                <p class="card-text">' + desc + '</p>' +
+                        '                                            </div>' +
+                        '                                        </div>' +
+                        '                                    </div>'
+                }
+
+            },
+            error: (xhr, status, error) => {
+                console.log(error)
+            }
+        })
+    }
 </script>
 
 </body>
