@@ -135,7 +135,8 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -243,6 +244,8 @@
                 prod_result.style.visibility = 'visible'
                 const prod_length = data['_embedded']['produits'].length
                 for (let i = 0; i < prod_length; i++) {
+                    let uri = data['_embedded']['produits'][i]['_links']['produit']['href'].split('/')
+                    let id = uri[uri.length - 1]
                     let nom = data['_embedded']['produits'][i]['nom']
                     let prix = data['_embedded']['produits'][i]['prix']
                     let desc = data['_embedded']['produits'][i]['description']
@@ -255,10 +258,10 @@
                         '                                                <p class="card-text">' + desc + '</p>' +
                         '                                            </div>' +
                         '                                            <div class="card-footer float-right">' +
-                        '                                                <button onclick="addToCart(1)" class="btn btn-sm btn-success">' +
-                        '<span class="material-icons">add_shopping_cart</span>'+
-                        'Ajouter au panier' +
-                        '</button>' +
+                        '                                                <button onclick="addToCart(\'' + id + '\')" class="btn btn-sm btn-success">' +
+                        '                                                    <span class="material-icons">add_shopping_cart</span>' +
+                        '                                                    Ajouter au panier' +
+                        '                                                </button>' +
                         '                                            </div>' +
                         '                                        </div>' +
                         '                                    </div>'
