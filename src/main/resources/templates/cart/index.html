@@ -38,7 +38,8 @@
                                     <br><small>by Eilco</small>
                                 </td>
                                 <td><p th:text="${c.description}"></p></td>
-                                <td class="td-number"><small>&#x20AC;</small><p th:text="${c.prix}"></p></td>
+                                <td class="td-number"><small>&#x20AC;</small>
+                                    <p th:text="${c.prix}"></p></td>
                                 <td class="td-number">
                                     1
                                     <div class="btn-group">
@@ -49,13 +50,14 @@
                                     </div>
                                 </td>
                                 <td class="td-number">
-                                    <small>&#x20AC;</small><p th:text="${c.prix}"></p>
+                                    <small>&#x20AC;</small>
+                                    <p th:text="${c.prix}"></p>
                                 </td>
                                 <td class="td-actions">
-                                    <button type="button" rel="tooltip" data-placement="left" title="Remove item"
-                                            class="btn btn-simple">
+                                    <a th:href="@{/user/commande/remove/{id}(id=${c.id})}" rel="tooltip" data-placement="left"
+                                       title="Remove item" class="btn btn-simple">
                                         <i class="material-icons">close</i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>

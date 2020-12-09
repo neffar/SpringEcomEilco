@@ -1,6 +1,8 @@
 package fr.ulco.ecom.controller;
 
+import fr.ulco.ecom.dao.ProduitRepository;
 import fr.ulco.ecom.model.Produit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,13 @@ import java.util.List;
 @RequestMapping(value = "/user/commande")
 public class CommandeController {
 
+    final private ProduitRepository produitRepository;
+
+    @Autowired
+    public CommandeController(ProduitRepository produitRepository) {
+        this.produitRepository = produitRepository;
+    }
+
     @RequestMapping(value = "")
     public String cart(Model model, HttpServletRequest request) {
         List<Produit> cart = (ArrayList<Produit>) request.getSession().getAttribute("cart");
@@ -29,6 +38,11 @@ public class CommandeController {
 
     @RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") String id, HttpServletRequest request) {
-        return null;
+        List<Produit> cart = (ArrayList<Produit>) request.getSession().getAttribute("cart");
+        request.getSession().removeAttribute("cart");
+        request.getSession().invalidate();
+        cart.remove(produitRepository.findById(Long.parseLong(id)));
+        request.getSession().setAttribute("cart", cart);
+        return "redirect:/user/commande";
     }
 }
