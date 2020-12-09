@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * contient les services de gestion des commandes et panier
@@ -40,8 +43,12 @@ public class CommandeController {
     public String remove(@PathVariable("id") String id, HttpServletRequest request) {
         List<Produit> cart = (ArrayList<Produit>) request.getSession().getAttribute("cart");
         request.getSession().removeAttribute("cart");
-        request.getSession().invalidate();
-        cart.remove(produitRepository.findById(Long.parseLong(id)));
+        List<Produit> produits = Arrays.stream(new long[]{Long.parseLong(id)})
+                .mapToObj(produitRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        cart.removeIf(e -> e.getId().equals(produits.get(0).getId()));
         request.getSession().setAttribute("cart", cart);
         return "redirect:/user/commande";
     }
