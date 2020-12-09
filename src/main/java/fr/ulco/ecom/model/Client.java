@@ -117,7 +117,6 @@ public class Client implements Serializable {
                 ", nom='" + nom + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", adresse='" + adresse + '\'' +
-                ", commandeClients=" + commandeClients +
                 '}';
     }
 }

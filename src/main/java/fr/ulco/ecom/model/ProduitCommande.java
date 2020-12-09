@@ -57,8 +57,6 @@ public class ProduitCommande implements Serializable {
         return "ProduitCommande{" +
                 "id=" + id +
                 ", quantite=" + quantite +
-                ", commandeClient=" + commandeClient +
-                ", produit=" + produit +
                 '}';
     }
 }

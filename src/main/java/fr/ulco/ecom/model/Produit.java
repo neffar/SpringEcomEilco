@@ -90,7 +90,6 @@ public class Produit implements Serializable {
                 ", prix=" + prix +
                 ", description='" + description + '\'' +
                 ", dernierMaj=" + dernierMaj +
-                ", categorie=" + categorie +
                 ", produitCommandes=" + produitCommandes +
                 '}';
     }

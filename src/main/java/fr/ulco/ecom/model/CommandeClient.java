@@ -80,7 +80,6 @@ public class CommandeClient implements Serializable {
                 ", dateCreation=" + dateCreation +
                 ", noConfirmation=" + noConfirmation +
                 ", client=" + client +
-                ", produitCommandes=" + produitCommandes +
                 '}';
     }
 }
