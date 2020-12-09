@@ -49,7 +49,7 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" th:href="@{/user/commande}">
-                        <i class="material-icons">point_of_sale</i>
+                        <i class="material-icons">shopping_cart</i>
                         <p>Panier</p>
                     </a>
                 </li>
@@ -133,6 +133,29 @@
 
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Parfait!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        L'article a été bien ajoutée dans le panier!
+                        <a href="/user/commande">Allez y ...</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="float-left">
@@ -232,7 +255,10 @@
                         '                                                <p class="card-text">' + desc + '</p>' +
                         '                                            </div>' +
                         '                                            <div class="card-footer float-right">' +
-                        '                                                <button onclick="addToCart(1)" class="btn btn-sm btn-default">Ajouter au panier</button>' +
+                        '                                                <button onclick="addToCart(1)" class="btn btn-sm btn-success">' +
+                        '<span class="material-icons">add_shopping_cart</span>'+
+                        'Ajouter au panier' +
+                        '</button>' +
                         '                                            </div>' +
                         '                                        </div>' +
                         '                                    </div>'
@@ -252,7 +278,7 @@
             url: '/user/commande/buy/' + id,
             cache: false,
             success: data => {
-                console.log(data)
+                $('#myModal').modal('show')
             },
             error: (xhr, status, error) => {
                 console.log(error)

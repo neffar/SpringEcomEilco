@@ -1,6 +1,5 @@
 package fr.ulco.ecom.controller;
 
-import fr.ulco.ecom.dao.ClientRepository;
 import fr.ulco.ecom.dao.ProduitRepository;
 import fr.ulco.ecom.model.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class RestCommandeController {
     final private ProduitRepository produitRepository;
 
     @Autowired
-    public RestCommandeController(ProduitRepository produitRepository, ClientRepository clientRepository) {
+    public RestCommandeController(ProduitRepository produitRepository) {
         this.produitRepository = produitRepository;
     }
 
@@ -31,12 +30,10 @@ public class RestCommandeController {
             List<Optional<Produit>> cart = new ArrayList<>();
             cart.add(produitRepository.findById(Long.parseLong(id)));
             session.setAttribute("cart", cart);
-            System.out.println(cart.toString());
         } else {
             List<Optional<Produit>> cart = (List<Optional<Produit>>) session.getAttribute("cart");
             cart.add(produitRepository.findById(Long.parseLong(id)));
             session.setAttribute("cart", cart);
-            System.out.println(cart.toString());
         }
     }
 }
