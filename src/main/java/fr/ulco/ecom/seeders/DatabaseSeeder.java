@@ -73,8 +73,8 @@ public class DatabaseSeeder {
                 Produit produit = new Produit();
                 produit.setDescription("Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs");
                 produit.setNom("Produit " + i);
-                float random = (float) (50 + Math.random() * 300);
-                produit.setPrix(random);
+                String random = String.format("%.2f", 50 + Math.random() * 300);
+                produit.setPrix(Float.parseFloat(random));
 
                 List<Categorie> tempCat = Arrays.stream(new long[]{(long) id})
                         .mapToObj(categorieRepository::findById)
