@@ -37,7 +37,7 @@ public class DatabaseSeeder {
     public void seed(ContextRefreshedEvent event) {
         seedUser();
         seedCategories();
-        //seedProducts();
+        seedProducts();
     }
 
     private void seedCategories() {
@@ -63,7 +63,10 @@ public class DatabaseSeeder {
 
     private void seedProducts() {
         final String sql = "SELECT * FROM produit";
+        final String sql2 = "SELECT * FROM categorie";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
+        List<Client> c = jdbcTemplate.query(sql2, (resultSet, rowNum) -> null);
+        System.out.println(c);
         if (u.size() <= 30) {
             int id = 1;
             for (int i = 1; i <= 30; i++) {
