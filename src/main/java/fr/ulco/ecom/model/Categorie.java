@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "categorie", schema = "spring_ecom_eilco")
+@Table(name = "categorie")
 public class Categorie implements Serializable {
 
     @Id
