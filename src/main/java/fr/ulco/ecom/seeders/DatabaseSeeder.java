@@ -41,8 +41,8 @@ public class DatabaseSeeder {
     }
 
     private void seedCategories() {
-        final String dc0 = "DVD", dc1 = "Ordinateurs", dc2 = "Accessoires", dc3 = "Téléphones", dc4 = "Parfumes";
-        String sql = "SELECT * FROM categorie WHERE nom IN (\"" + dc0 + "\", \"" + dc1 + "\", \"" + dc2 + "\", \"" + dc3 + "\", \"" + dc4 + "\")";
+        final String dc0 = "'DVD'", dc1 = "'Ordinateurs'", dc2 = "'Accessoires'", dc3 = "'Téléphones'", dc4 = "'Parfumes'";
+        String sql = "SELECT * FROM categorie WHERE \"nom\" IN ( + " + dc0 + "," + dc1 + "," + dc2 + "," + dc3 + "," + dc4 + ")";
         List<Categorie> rs = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (rs.size() <= 0) {
             Categorie c = new Categorie("DVD");
@@ -62,7 +62,7 @@ public class DatabaseSeeder {
     }
 
     private void seedProducts() {
-        final String sql = "SELECT id FROM produit";
+        final String sql = "SELECT * FROM produit";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (u.size() <= 30) {
             int id = 1;
