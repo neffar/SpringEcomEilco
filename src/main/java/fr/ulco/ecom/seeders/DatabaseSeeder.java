@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -42,8 +41,8 @@ public class DatabaseSeeder {
     }
 
     private void seedCategories() {
-        String dc0 = "DVD", dc1 = "Ordinateurs", dc2 = "Accessoires", dc3 = "Téléphones", dc4 = "Parfumes";
-        String sql = "SELECT nom FROM categorie c WHERE c.nom IN (\"" + dc0 + "\", \"" + dc1 + "\", \"" + dc2 + "\", \"" + dc3 + "\", \"" + dc4 + "\")";
+        final String dc0 = "DVD", dc1 = "Ordinateurs", dc2 = "Accessoires", dc3 = "Téléphones", dc4 = "Parfumes";
+        String sql = "SELECT * FROM categorie WHERE nom IN (\"" + dc0 + "\", \"" + dc1 + "\", \"" + dc2 + "\", \"" + dc3 + "\", \"" + dc4 + "\")";
         List<Categorie> rs = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (rs.size() <= 0) {
             Categorie c = new Categorie("DVD");
@@ -63,7 +62,7 @@ public class DatabaseSeeder {
     }
 
     private void seedProducts() {
-        String sql = "SELECT p.id FROM produit p";
+        final String sql = "SELECT id FROM produit";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (u.size() <= 30) {
             int id = 1;
@@ -93,7 +92,7 @@ public class DatabaseSeeder {
     }
 
     private void seedUser() {
-        String sql = "SELECT email FROM client c WHERE c.email = \"neffar@bourichi.fr\" LIMIT 1";
+        final String sql = "SELECT * FROM client WHERE \"email\" = \"neffar@bourichi.fr\" LIMIT 1";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (u.size() <= 0) {
             Client user = new Client();
