@@ -99,7 +99,7 @@ public class DatabaseSeeder {
             Client user = new Client();
             user.setNom("Neffar & Bourichi");
             user.setEmail("neffar@bourichi.fr");
-            user.setPassword(new BCryptPasswordEncoder().encode("eilco123"));
+            user.setPassword("eilco123");
             user.setAdresse("EILCO ULCO France Calais");
             user.setTelephone("01 22 44 66 88");
             user.setAuthority("ROLE_USER");

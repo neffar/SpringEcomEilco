@@ -65,7 +65,7 @@
                     <a class="navbar-brand" href="javascript:">
                         <div layout:fragment="page_header"></div>
 
-                        <!--                        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+                        <!--                        <h1 th:inline="text">Hello </h1>-->
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
@@ -85,8 +85,8 @@
                                 <div class="ripple-container"></div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
+<!--                                <a class="dropdown-item" href="#">Profile</a>-->
+                                <a class="dropdown-item" href="#">Welcome [[${#httpServletRequest.remoteUser}]]</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" th:href="@{/logout}">Log out</a>
                             </div>
