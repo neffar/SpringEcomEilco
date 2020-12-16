@@ -92,7 +92,7 @@ public class DatabaseSeeder {
     }
 
     private void seedUser() {
-        final String sql = "SELECT * FROM client WHERE \"email\" = \"neffar@bourichi.fr\" LIMIT 1";
+        final String sql = "SELECT * FROM client WHERE \"email\" = " + "'neffar@bourichi.fr'" + " LIMIT 1";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (u.size() <= 0) {
             Client user = new Client();
