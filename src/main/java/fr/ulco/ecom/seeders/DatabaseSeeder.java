@@ -37,7 +37,7 @@ public class DatabaseSeeder {
     public void seed(ContextRefreshedEvent event) {
         seedUser();
         seedCategories();
-        seedProducts();
+        //seedProducts();
     }
 
     private void seedCategories() {
