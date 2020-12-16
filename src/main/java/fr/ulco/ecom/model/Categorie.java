@@ -17,6 +17,14 @@ public class Categorie implements Serializable {
     @OneToMany(targetEntity = Produit.class, mappedBy = "categorie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produit> produits;
 
+    public Categorie() {
+
+    }
+
+    public Categorie(String nom) {
+        this.nom = nom;
+    }
+
     public Long getId() {
         return id;
     }
