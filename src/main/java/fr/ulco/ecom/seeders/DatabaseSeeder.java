@@ -62,12 +62,6 @@ public class DatabaseSeeder {
     }
 
     private void seedProducts() {
-//        final String sql = "SELECT * from categorie";
-//        List<Object> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> resultSet.getString("id"));
-//        System.out.println(u.toString());
-//        final String sql = "INSERT INTO produit(\"id\", \"nom\", \"prix\", \"description\", \"categorie_id\") values (1, 'Produit', 100, 'dessss', 1)";
-//        List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
-
         final String sql = "SELECT * from produit";
         List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
         if (u.size() <= 30) {
