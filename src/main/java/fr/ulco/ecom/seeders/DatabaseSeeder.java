@@ -62,37 +62,39 @@ public class DatabaseSeeder {
     }
 
     private void seedProducts() {
-        final String sql = "SELECT * from categorie";
-        List<Object> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> resultSet.getString("id"));
-        System.out.println(u.toString());
+//        final String sql = "SELECT * from categorie";
+//        List<Object> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> resultSet.getString("id"));
+//        System.out.println(u.toString());
 //        final String sql = "INSERT INTO produit(\"id\", \"nom\", \"prix\", \"description\", \"categorie_id\") values (1, 'Produit', 100, 'dessss', 1)";
 //        List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
 
-//        if (u.size() <= 30) {
-//            int id = 1;
-//            for (int i = 1; i <= 30; i++) {
-//                if (id > 5)
-//                    id = 1;
-//                Produit produit = new Produit();
-//                produit.setDescription("Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs");
-//                produit.setNom("Produit " + i);
-//                String random = String.format("%.2f", 50 + Math.random() * 300);
-//                produit.setPrix(Float.parseFloat(random));
-//
-//                List<Categorie> tempCat = Arrays.stream(new long[]{(long) id})
-//                        .mapToObj(categorieRepository::findById)
-//                        .filter(Optional::isPresent)
-//                        .map(Optional::get)
-//                        .collect(Collectors.toList());
-//                id++;
-//                produit.setCategorie(tempCat.get(0));
-//                produitRepository.save(produit);
-//
-//            }
-//            System.out.println("Produits Seeded");
-//        } else {
-//            System.out.println("Produits Seeding Not Required");
-//        }
+        final String sql = "SELECT * from produit";
+        List<Client> u = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
+        if (u.size() <= 30) {
+            int id = 2;
+            for (int i = 1; i <= 30; i++) {
+                if (id > 6)
+                    id = 2;
+                Produit produit = new Produit();
+                produit.setDescription("Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs");
+                produit.setNom("Produit " + i);
+                String random = String.format("%.2f", 50 + Math.random() * 300);
+                produit.setPrix(Float.parseFloat(random));
+
+                List<Categorie> tempCat = Arrays.stream(new long[]{(long) id})
+                        .mapToObj(categorieRepository::findById)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(Collectors.toList());
+                id++;
+                produit.setCategorie(tempCat.get(0));
+                produitRepository.save(produit);
+
+            }
+            System.out.println("Produits Seeded");
+        } else {
+            System.out.println("Produits Seeding Not Required");
+        }
     }
 
     private void seedUser() {
